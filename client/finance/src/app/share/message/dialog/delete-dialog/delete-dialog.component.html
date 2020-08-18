@@ -1,0 +1,13 @@
+<!-- Angular Dialog -->
+<div class="custom-dialog">
+	<h2 mat-dialog-title class="text-center">{{data.title}}</h2>
+	<mat-dialog-content>
+		<p class="text-center">
+            {{data.message}}
+		</p>
+	</mat-dialog-content>
+	<mat-dialog-actions class="button-dialog">
+		<button mat-button mat-raised-button [mat-dialog-close]="false">Cancel</button>
+		<button mat-raised-button color="warn" [mat-dialog-close]="true">Delete</button>
+	</mat-dialog-actions>
+</div>

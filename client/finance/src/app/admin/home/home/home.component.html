@@ -1,0 +1,85 @@
+
+    <div class="card m-2 p-2 admin-microfi">
+      <h2 class="card-header text-left">Admin Panel</h2>
+
+      <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show">
+        {{errorMessage}}
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+
+      <div class="card-body" *ngIf="!errorMessage">
+            <b class="float-right">Microfinance Institutions List</b>
+              <div fxFlexFill fxLayoutAlign="right">
+                <mat-form-field fxFlex="70%">
+                  <input matInput type="text" (keyup)="filterMfi($event.target.value)" placeholder="Search">
+                </mat-form-field>
+              </div>
+              <div class="mat-elevation-z8">
+              <table mat-table [dataSource]="dataSource" matSort matSortStart="desc">
+                <ng-container matColumnDef="mfi_type">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Mfi Type </th>
+                  <td mat-cell *matCellDef="let mfi"> {{mfi.mfi_type}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="mfi_name">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Mfi Name </th>
+                  <td mat-cell *matCellDef="let mfi"> {{mfi.mfi_name}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="mfi_service">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Mfi Service </th>
+                  <td mat-cell *matCellDef="let mfi"> {{mfi.mfi_service}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="mfi_assets" >
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Mfi Assets </th>
+                  <td mat-cell *matCellDef="let mfi"> {{mfi.mfi_assets}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="mfi_liability">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Mfi Liability </th>
+                  <td mat-cell *matCellDef="let mfi"> {{mfi.mfi_liability}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="mfi_technology">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Mfi Technology </th>
+                  <td mat-cell *matCellDef="let mfi"> {{mfi.mfi_technology}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="email">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Mfi Email </th>
+                  <td mat-cell *matCellDef="let mfi"> {{mfi.email}} </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="details">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Details </th>
+                  <td mat-cell *matCellDef="let mfi">
+                    <button class="btn btn-secondary" (click)="microfiDetails(mfi)">Details</button>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="feedback">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Feedback </th>
+                  <td mat-cell *matCellDef="let mfi">
+                    <button mat-raised-button color="primary" (click)="openAdminFeedbackDialog(mfi)">Feedback</button>
+                  </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns sticky: true" ></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                </tr>
+              </table>
+              <mat-paginator #paginator [pageSize]="6" [pageSizeOptions]="[2, 4, 6, 10, 20]" [showFirstLastButtons]="true">
+              </mat-paginator>
+              <div class="">&nbsp;
+                <b> Export</b> &nbsp;&nbsp;&nbsp;
+                <button mat-raised-button color="primary" (click)="exportExcel()">EXCEL</button>&nbsp;&nbsp;
+                <button mat-raised-button color="primary" (click)="exportCsv()"> CSV</button>
+              </div>
+              <br>
+              
+          </div>
+      </div>
+  </div>
+ 
+  

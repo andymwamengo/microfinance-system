@@ -1,0 +1,52 @@
+<div class="card m-2 p-1">
+
+  <!-- Common Page Settings  -->
+  <div class="p-3 text-center" fxLayoutGap="10px" fxLayout="row" fxLayout.xs="column" fxFlexFill>
+    <div class="card p-2 one" fxFlex="25%;" fxFlex.xs="80%" fxFlexFill>
+      <p><mat-icon>memory</mat-icon> {{ this.totalMfi }} Institutions</p>
+    </div>
+    <div class="card p-2 two" fxFlex="25%;" fxFlex.xs="80%" fxFlexFill>
+      <p class="text-primary"><mat-icon>people</mat-icon> 5466 Visitors</p>
+    </div>
+    <div class="card p-2 three" fxFlex="25%;" fxFlex.xs="80%" fxFlexFill>
+      <p> <mat-icon>rate_review</mat-icon> 43% Ratings</p>
+    </div>
+    <div class="card p-2 four" fxFlex="25%;" fxFlex.xs="80%" fxFlexFill>
+      <p><mat-icon>report</mat-icon> Reports</p>
+      <div class="text-left">
+        <div *ngFor = "let test of totalMfiType; let i = index">
+          <div *ngFor = "let mfi of test ;let n = index">
+              <div>{{mfi.mfi_type+' '+ mfi.type | uppercase }}</div>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  
+  <!--  -->
+  <div class="text-right uk-text-bold mr-3 pr-3">
+    <h2>Institutions Charts Visualization</h2>
+  </div>
+  <div class="card-body bg-white">
+    <div fxFlexFill class="text-center">
+      <div fxLayoutGap="10px" fxLayout="row" fxLayout.xs="column" fxFlexFill>
+        <div fxFlex="50%;" fxFlex.xs="80%" fxFlexFill>
+          <app-bar-charts></app-bar-charts>
+        </div>
+        <div fxFlex="50%;" fxFlex.xs="80%" fxFlexFill>
+          <app-line-charts></app-line-charts>
+        </div>
+      </div>
+
+      <!--  -->
+      <div fxLayoutGap="10px" fxLayout="row" fxLayout.xs="column" fxFlexFill>
+        <div fxFlex="50%;" fxFlex.xs="80%" fxFlexFill>
+          <app-doughnut-charts></app-doughnut-charts>
+        </div>
+        <div fxFlex="50%;" fxFlex.xs="80%" fxFlexFill>
+          <app-pie-charts></app-pie-charts>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

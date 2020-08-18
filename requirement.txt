@@ -1,0 +1,38 @@
+This is the file with project dependency
+
+To install python packages dependency use 'pip install package-name' 
+django                    3.0.3                 
+django-cors-headers       3.3.0                    
+django-filter             2.3.0                    
+django-redis              4.12.1                  
+djangorestframework       3.11.0           
+djangorestframework-simplejwt 4.4.0
+numpy                     1.18.5
+numpy-base                1.18.5
+pandas                    1.0.5
+scikit-learn              0.23.1
+psycopg2-binary           2.8.5
+joblib                    0.15.1
+pickleshare               0.7.5
+pandas                    1.0.5
+
+Angular Client Application install angular packages dependency check npm 'npm install package-name'
+Angular CLI: 10.0.1
+Node: 12.18.3
+npm version 6.14.5
+@auth0/angular-jwt 4.2.0
+@angular/flex-layout 10.0.0-beta.32
+@angular/material 9.2.4
+ng2-charts 2.3.2
+chart.js 2.9.3
+@auth0/angular-jwt 5.0.1
+bootstrap 4.5.0
+chart.js 2.9.3
+jquery 3.5.1
+jwt-decode 2.2.0
+ng2-charts 2.3.2
+ngx-pagination 5.0.0
+ngx-quill 12.0.1
+ngx-toastr 12.1.0
+quill  1.3.7
+xlsx 0.16.3

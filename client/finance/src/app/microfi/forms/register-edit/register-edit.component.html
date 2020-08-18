@@ -1,0 +1,98 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-dialog-content [formGroup]="updateMfiForm">
+
+  <div class="form-group">
+
+    <div class="form-group">
+    <mat-form-field >
+      <mat-label>Enter Mfi Name</mat-label>
+      <input matInput  placeholder="Enter Mfi Name" formControlName="mfi_name"  
+      [ngClass]="{ 'is-invalid': submitted && f.mfi_name.errors }">
+      <mat-error *ngIf="submitted && f.mfi_name.errors" class="invalid-feedback">
+        <mat-error *ngIf="f.mfi_name.errors.required">Mfi Name required</mat-error>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+  <mat-form-field >
+    <mat-label>Enter Mfi License</mat-label>
+    <input matInput placeholder="Enter Mfi License" formControlName="mfi_license"  
+    [ngClass]="{ 'is-invalid': submitted && f.mfi_license.errors }">
+    <mat-error *ngIf="submitted && f.mfi_license.errors" class="invalid-feedback">
+      <mat-error *ngIf="f.mfi_license.errors.required">Mfi License required</mat-error>
+    </mat-error>
+  </mat-form-field>
+</div>
+
+
+<div class="form-group">
+<mat-form-field >
+    <mat-label>Enter Mfi Service</mat-label>
+    <input matInput  placeholder="Enter Mfi Service" formControlName="mfi_service"  
+    [ngClass]="{ 'is-invalid': submitted && f.mfi_service.errors }">
+    <mat-error *ngIf="submitted && f.mfi_service.errors" class="invalid-feedback">
+      <mat-error *ngIf="f.mfi_service.errors.required">Mfi Service required</mat-error>
+    </mat-error>
+  </mat-form-field>
+</div>
+
+
+<div class="form-group">
+<mat-form-field >
+    <mat-label>Enter Mfi Assets</mat-label>
+    <input matInput  placeholder="Enter Mfi Assets" formControlName="mfi_assets"  
+    [ngClass]="{ 'is-invalid': submitted && f.mfi_assets.errors }">
+    <mat-error *ngIf="submitted && f.mfi_assets.errors" class="invalid-feedback">
+      <mat-error *ngIf="f.mfi_assets.errors.required">Mfi Assets required</mat-error>
+    </mat-error>
+  </mat-form-field>
+</div>
+
+
+<div class="form-group">
+<mat-form-field >
+    <mat-label>Enter Mfi Liability</mat-label>
+    <input matInput  placeholder="Enter Mfi Liability" formControlName="mfi_liability"  
+    [ngClass]="{ 'is-invalid': submitted && f.mfi_liability.errors }">
+    <mat-error *ngIf="submitted && f.mfi_liability.errors" class="invalid-feedback">
+      <mat-error *ngIf="f.mfi_liability.errors.required">Mfi Liability required</mat-error>
+    </mat-error>
+  </mat-form-field>
+</div>
+
+
+<div class="form-group">
+<mat-form-field >
+    <mat-label>Enter Mfi Technology </mat-label>
+    <input matInput  placeholder="Enter Mfi Technology " formControlName="mfi_technology"  
+    [ngClass]="{ 'is-invalid': submitted && f.mfi_technology.errors }">
+    <mat-error *ngIf="submitted && f.mfi_technology.errors" class="invalid-feedback">
+      <mat-error *ngIf="f.mfi_technology.errors.required">Mfi Technology required</mat-error>
+    </mat-error>
+  </mat-form-field>
+</div>
+
+
+<div class="form-group">
+<mat-form-field >
+    <mat-label>Enter Mfi Email</mat-label>
+    <input matInput  placeholder="Enter Mfi Email" formControlName="email"  
+    [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+    <mat-error *ngIf="submitted && f.email.errors" class="invalid-feedback">
+      <mat-error *ngIf="f.email.errors.required">Mfi Email required</mat-error>
+      <mat-error *ngIf="f.email.errors.email">Enter valid email</mat-error>
+    </mat-error>
+  </mat-form-field>
+</div>
+  
+</div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="float-right text-center">
+    <button mat-button class="mat-raised-button"  (click)="onNoClick()" tabindex="-1">Cancel</button>&nbsp;&nbsp;
+    <button class="mat-raised-button mat-primary"  (click)="updateMfi()"> Update </button>
+    <!-- [disabled]="!form.valid" -->
+</mat-dialog-actions>
+

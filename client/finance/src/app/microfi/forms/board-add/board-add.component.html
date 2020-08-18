@@ -1,0 +1,105 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-dialog-content [formGroup]="boardForm">
+
+  <div class="form-group">
+    <mat-form-field >
+      <mat-label>Enter First Name</mat-label>
+      <input matInput  placeholder="Enter First Name" formControlName="board_first_name"  
+      [ngClass]="{ 'is-invalid': submitted && f.board_first_name.errors }">
+      <mat-error *ngIf="submitted && f.board_first_name.errors" class="invalid-feedback">
+        <mat-error *ngIf="f.board_first_name.errors.required">First Name required</mat-error>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+    <div class="form-group">
+      <mat-form-field >
+          <mat-label>Enter Middle Name</mat-label>
+          <input matInput  placeholder="Enter Middle Name" formControlName="board_middle_name"  
+          [ngClass]="{ 'is-invalid': submitted && f.board_middle_name.errors }">
+          <mat-error *ngIf="submitted && f.board_middle_name.errors" class="invalid-feedback">
+          </mat-error>
+        </mat-form-field>
+    </div>
+
+
+      <div class="form-group">
+        <mat-form-field >
+          <mat-label>Enter Last Name</mat-label>
+          <input matInput  placeholder="Enter Last Name" formControlName="board_last_name"  
+          [ngClass]="{ 'is-invalid': submitted && f.board_last_name.errors }">
+          <mat-error *ngIf="submitted && f.board_last_name.errors" class="invalid-feedback">
+            <mat-error *ngIf="f.board_last_name.errors.required">Last Name required</mat-error>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      
+      <div class="form-group">
+        <mat-form-field >
+          <mat-label>Enter Phone Number</mat-label>
+          <input matInput  placeholder="Enter Phone Number" formControlName="board_phone_number"  
+          [ngClass]="{ 'is-invalid': submitted && f.board_phone_number.errors }">
+          <mat-error *ngIf="submitted && f.board_phone_number.errors" class="invalid-feedback">
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      
+      <div class="form-group">
+        <mat-form-field>
+            <mat-label>Enter Email</mat-label>
+            <input matInput  placeholder="Enter Stakeholder Email" formControlName="board_email" 
+            [ngClass]="{ 'is-invalid': submitted && f.board_email.errors }">
+            <mat-error *ngIf="submitted && f.board_email.errors" class="invalid-feedback">
+                <mat-error *ngIf="f.board_email.errors.email">Enter valid email</mat-error>
+              </mat-error>
+        </mat-form-field>
+      </div>
+
+      
+    <div class="form-group">
+      <mat-form-field>
+          <mat-label>Enter Citizenship</mat-label>
+          <input matInput  placeholder="Enter Citizenship" formControlName="board_citizenship"  
+          [ngClass]="{ 'is-invalid': submitted && f.board_citizenship.errors }">
+          <mat-error *ngIf="submitted && f.board_citizenship.errors">
+              <mat-error *ngIf="f.board_citizenship.errors.required">Citizenship required</mat-error>
+            </mat-error>
+      </mat-form-field>
+    </div>
+
+      
+    <div class="form-group">
+      <mat-form-field>
+          <mat-label>Enter Position</mat-label>
+          <input matInput placeholder="Enter Position" formControlName="board_position"  
+          [ngClass]="{ 'is-invalid': submitted && f.board_position.errors }">
+          <mat-error *ngIf="submitted && f.board_position.errors">
+              <mat-error *ngIf="f.board_position.errors.required">Position required</mat-error>
+            </mat-error>
+      </mat-form-field>
+    </div>
+
+      
+    <div class="form-group">
+      <mat-form-field >
+          <mat-label>Enter profile</mat-label>
+          <input matInput  placeholder="Enter Profile" formControlName="board_avatar"  
+          [ngClass]="{ 'is-invalid': submitted && f.board_avatar.errors }">
+          <mat-error *ngIf="submitted && f.board_avatar.errors" class="invalid-feedback">
+          </mat-error>
+        </mat-form-field>
+    </div>
+
+
+</mat-dialog-content>
+
+<mat-dialog-actions class="float-right text-center">
+    <button class="mat-raised-button"   (click)="close()"> Close </button>&nbsp;&nbsp;
+    <button class="mat-raised-button mat-primary"  (click)="saveBoard()"
+     [disabled]="!boardForm.value"> Save </button>
+    <!-- [disabled]="!form.valid" -->
+</mat-dialog-actions>
+

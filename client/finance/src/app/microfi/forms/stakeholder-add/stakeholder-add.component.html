@@ -1,0 +1,104 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-dialog-content [formGroup]="stakeholderForm">
+
+  <div class="form-group">
+    <mat-form-field >
+      <mat-label>Enter First Name</mat-label>
+      <input matInput  placeholder="Enter First Name" formControlName="stake_first_name"  
+      [ngClass]="{ 'is-invalid': submitted && f.stake_first_name.errors }">
+      <mat-error *ngIf="submitted && f.stake_first_name.errors" class="invalid-feedback">
+        <mat-error *ngIf="f.stake_first_name.errors.required">First Name required</mat-error>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+    <div class="form-group">
+      <mat-form-field >
+          <mat-label>Enter Middle Name</mat-label>
+          <input matInput  placeholder="Enter Middle Name" formControlName="stake_middle_name"  
+          [ngClass]="{ 'is-invalid': submitted && f.stake_middle_name.errors }">
+          <mat-error *ngIf="submitted && f.stake_middle_name.errors" class="invalid-feedback">
+          </mat-error>
+        </mat-form-field>
+    </div>
+
+
+      <div class="form-group">
+        <mat-form-field >
+          <mat-label>Enter Last Name</mat-label>
+          <input matInput  placeholder="Enter Last Name" formControlName="stake_last_name"  
+          [ngClass]="{ 'is-invalid': submitted && f.stake_last_name.errors }">
+          <mat-error *ngIf="submitted && f.stake_last_name.errors" class="invalid-feedback">
+            <mat-error *ngIf="f.stake_last_name.errors.required">Last Name required</mat-error>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      
+      <div class="form-group">
+        <mat-form-field >
+          <mat-label>Enter Phone Number</mat-label>
+          <input matInput  placeholder="Enter Phone Number" formControlName="stake_phone_number"  
+          [ngClass]="{ 'is-invalid': submitted && f.stake_phone_number.errors }">
+          <mat-error *ngIf="submitted && f.stake_phone_number.errors" class="invalid-feedback">
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      
+      <div class="form-group">
+        <mat-form-field>
+            <mat-label>Enter Email</mat-label>
+            <input matInput  placeholder="Enter Stakeholder Email" formControlName="stake_email" 
+            [ngClass]="{ 'is-invalid': submitted && f.stake_email.errors }">
+            <mat-error *ngIf="submitted && f.stake_email.errors" class="invalid-feedback">
+                <mat-error *ngIf="f.stake_email.errors.email">Enter valid email</mat-error>
+              </mat-error>
+        </mat-form-field>
+      </div>
+
+      
+    <div class="form-group">
+      <mat-form-field>
+          <mat-label>Enter Stakeholder Citizenship</mat-label>
+          <input matInput placeholder="Enter Citizenship Share" formControlName="stake_citizenship"  
+          [ngClass]="{ 'is-invalid': submitted && f.stake_citizenship.errors }">
+          <mat-error *ngIf="submitted && f.stake_citizenship.errors">
+              <mat-error *ngIf="f.stake_citizenship.errors.required">Citizenship required</mat-error>
+            </mat-error>
+      </mat-form-field>
+    </div>
+
+      
+    <div class="form-group">
+      <mat-form-field>
+          <mat-label>Enter Stakeholder Share</mat-label>
+          <input matInput  placeholder="Enter Stakeholder Share" formControlName="stake_share"  
+          [ngClass]="{ 'is-invalid': submitted && f.stake_share.errors }">
+          <mat-error *ngIf="submitted && f.stake_share.errors">
+              <mat-error *ngIf="f.stake_share.errors.required">Share required</mat-error>
+            </mat-error>
+      </mat-form-field>
+    </div>
+
+      
+    <div class="form-group">
+      <mat-form-field >
+          <mat-label>Enter profile</mat-label>
+          <input matInput placeholder="Enter Profile" formControlName="stake_avatar"  
+          [ngClass]="{ 'is-invalid': submitted && f.stake_avatar.errors }">
+          <mat-error *ngIf="submitted && f.stake_avatar.errors" class="invalid-feedback">
+          </mat-error>
+        </mat-form-field>
+    </div>
+
+
+</mat-dialog-content>
+
+<mat-dialog-actions class="float-right text-center">
+    <button class="mat-raised-button"   (click)="close()"> Close </button>&nbsp;&nbsp;
+    <button class="mat-raised-button mat-primary"  (click)="saveStakeholder()"> Save </button>
+    <!-- [disabled]="!form.valid" -->
+</mat-dialog-actions>
+

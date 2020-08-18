@@ -1,0 +1,17 @@
+/* Login Form Component stylesheet */
+
+.login-content {
+  min-height: 100vh;
+  .login-form {
+    margin: 5px;
+    background-color: rgb(249, 249, 255);
+    .mat-form-field {
+      padding: 5px;
+      width: 100%;
+      input {
+        background-color: rgb(241, 238, 232);
+        padding: 15px;
+      }
+    }
+  }
+}

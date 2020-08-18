@@ -1,0 +1,193 @@
+<div fxLayout="row" fxLayoutAlign="center center" class="register-container jumbotron">
+    <mat-card fxFlex="80%" fxFlex.md="80%" fxFlex.sm="90%" fxFlex.xs="100%" class="register-form">
+     
+      <mat-card-title class="text-center pt-2 pb-5">Register Microfinance Institution</mat-card-title>
+      <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show">
+        {{errorMessage}}
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+      </div>
+  
+        <mat-card-content fxLayout="column">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  
+              <div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start">
+                <div fxFlex="48%" fxFlex.xs="92%" fxFlex.sm="45%" fxFlex.md="45%">
+                    <div class="form-group">
+                      <mat-form-field>  
+                        <mat-label>Choose Type of Mfi</mat-label>
+                        <mat-select formControlName="mfi_type">
+                            <mat-option value="bank">BANK</mat-option>  
+                            <mat-option value="saccoss">SACCOSS</mat-option>  
+                            <mat-option value="vicoba">VICOBA</mat-option>  
+                            <mat-option value="private">PRIVATE</mat-option>  
+                        </mat-select>  
+                        <mat-error *ngIf="submitted && f.mfi_type.errors" class="invalid-feedback">
+                            <mat-error *ngIf="f.mfi_type.errors.required"> Type required</mat-error>
+                          </mat-error>
+                      </mat-form-field>  
+                    </div>
+                  </div>
+
+                  <div fxFlex="48%" fxFlex.xs="92%" fxFlex.sm="45%" fxFlex.md="45%">
+                    <div class="form-group">
+                      <mat-form-field>  
+                        <mat-label>Enter Mfi License</mat-label>
+                        <mat-select formControlName="mfi_license">
+                            <mat-option value="0" disabled  selected> Select License</mat-option>  
+                            <mat-option *ngFor="let lic of license" value="{{ lic.mfi_license }}">
+                              {{lic.mfi_name}} &nbsp;&nbsp;  {{ lic.mfi_license }}</mat-option>  
+                        </mat-select>  
+                        <mat-error *ngIf="submitted && f.mfi_license.errors" class="invalid-feedback">
+                            <mat-error *ngIf="f.mfi_license.errors.required">Mfi Type required</mat-error>
+                          </mat-error>
+                      </mat-form-field>  
+                    </div>
+                  </div>
+              </div>
+  
+          <div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start">
+            <div fxFlex="48%" fxFlex.xs="92%" fxFlex.sm="45%" fxFlex.md="45%">    
+              <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Enter Mfi Name</mat-label>
+                    <input matInput  placeholder="Enter  Mfi Name" formControlName="mfi_name" 
+                    [ngClass]="{ 'is-invalid': submitted && f.mfi_name.errors }">
+                    <mat-error *ngIf="submitted && f.mfi_name.errors" class="invalid-feedback">
+                        <mat-error *ngIf="f.mfi_name.errors.required"> Name required</mat-error>
+                      </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div fxFlex="48%" fxFlex.xs="92%" fxFlex.sm="45%" fxFlex.md="45%">
+              <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Enter Mfi Service</mat-label>
+                    <input matInput  placeholder="Enter  Mfi Service" formControlName="mfi_service" 
+                    [ngClass]="{ 'is-invalid': submitted && f.mfi_service.errors }">
+                    <mat-error *ngIf="submitted && f.mfi_service.errors" class="invalid-feedback">
+                        <mat-error *ngIf="f.mfi_service.errors.required"> Service required</mat-error>
+                      </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+  
+          <div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start">
+            <div fxFlex="48%" fxFlex.xs="92%" fxFlex.sm="45%" fxFlex.md="45%"> 
+              <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Enter Mfi Assets</mat-label>
+                    <input matInput  placeholder="Enter  Mfi Assets" formControlName="mfi_assets" 
+                    [ngClass]="{ 'is-invalid': submitted && f.mfi_assets.errors }">
+                    <mat-error *ngIf="submitted && f.mfi_assets.errors" class="invalid-feedback">
+                        <mat-error *ngIf="f.mfi_assets.errors.required"> Assets required</mat-error>
+                      </mat-error>
+                </mat-form-field>
+                </div>
+              </div>
+
+              <div fxFlex="48%" fxFlex.xs="92%" fxFlex.sm="45%" fxFlex.md="45%">
+                <div class="form-group">
+                    <mat-form-field>
+                        <mat-label>Enter Mfi Liability</mat-label>
+                        <input matInput  placeholder="Enter  Mfi Liability" formControlName="mfi_liability" 
+                        [ngClass]="{ 'is-invalid': submitted && f.mfi_liability.errors }">
+                        <mat-error *ngIf="submitted && f.mfi_liability.errors" class="invalid-feedback">
+                            <mat-error *ngIf="f.mfi_liability.errors.required"> Liability required</mat-error>
+                          </mat-error>
+                    </mat-form-field>
+                  </div>
+              </div>
+          </div>
+
+
+          <div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start">
+            <div fxFlex="48%" fxFlex.xs="92%" fxFlex.sm="45%" fxFlex.md="45%"> 
+                  <div class="form-group">
+                    <mat-form-field>
+                        <mat-label>Enter Mfi Technology</mat-label>
+                        <input matInput  placeholder="Enter Mfi Technology" formControlName="mfi_technology" 
+                        [ngClass]="{ 'is-invalid': submitted && f.mfi_technology.errors }">
+                        <mat-error *ngIf="submitted && f.mfi_technology.errors" class="invalid-feedback">
+                            <mat-error *ngIf="f.mfi_technology.errors.required">Technology required</mat-error>
+                           </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+  
+                <div fxFlex="48%" fxFlex.xs="92%" fxFlex.sm="45%" fxFlex.md="45%">
+                <div class="form-group">
+                    <mat-form-field>
+                        <mat-label>Enter Mfi Email</mat-label>
+                        <input matInput  placeholder="Enter Mfi  Email" formControlName="email" 
+                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                        <mat-error *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                            <mat-error *ngIf="f.email.errors.required">Email required</mat-error>
+                            <mat-error *ngIf="f.email.errors.email">Enter valid email</mat-error>
+                          </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+  
+
+          <div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start">
+            <div fxFlex="48%" fxFlex.xs="92%" fxFlex.sm="45%" fxFlex.md="45%"> 
+                  <div class="form-group">
+                    <mat-form-field>
+                        <mat-label>Enter Mfi Password</mat-label>
+                        <input matInput  placeholder="Enter Password" [type]="hide ? 'password' : 'text'"  formControlName="password"  
+                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        <mat-error *ngIf="submitted && f.password.errors">
+                            <mat-error *ngIf="f.password.errors.required">Password required</mat-error>
+                          </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+  
+                  <div fxFlex="48%" fxFlex.xs="92%" fxFlex.sm="45%" fxFlex.md="45%">
+                  <div class="form-group">
+                    <mat-form-field>
+                        <mat-label>Confirm Password</mat-label>
+                        <input matInput  placeholder="Enter Password" [type]="hide ? 'password' : 'text'"  formControlName="confirmPassword"  
+                        [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }">
+                        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        <mat-error *ngIf="submitted && f.confirmPassword.errors">
+                            <mat-error *ngIf="f.confirmPassword.errors.required">Password is required</mat-error>
+                            <mat-error *ngIf="f.confirmPassword.errors.mustMatch">Password don't match</mat-error>
+                          </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+  
+  
+            <div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start">
+                <div fxFlex="48%" fxFlex.xs="92%" fxFlex.sm="100%" fxFlex.md="45%"> 
+                <div class="form-group form-check">
+                    <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.acceptTerms.errors }" />
+                    <label for="acceptTerms" class="form-check-label">Accept Terms & Conditions</label>
+                    <div class=""> <a routerLink="/terms">Read Here</a></div>
+                    <div *ngIf="submitted && f.acceptTerms.errors" class="invalid-feedback">Accept Ts & Cs is required</div>
+                </div>
+              </div>
+
+                <div fxFlex="48%" fxFlex.xs="92%" fxFlex.sm="100%" fxFlex.md="45%">
+                <div class="text-left">
+                    <button class="btn btn-primary mr-2" [disabled]="!registerForm.valid">Register</button>
+                    <button class="btn btn-secondary ml-2" type="reset" (click)="onReset()">Cancel</button>
+                </div>
+              </div>
+            </div>
+
+            </form>
+        </mat-card-content>
+  
+        <div class="p-3 m-3">I have account!. 
+           <b><a routerLink="/auth/login/" class="text-decoration-none">&nbsp;&nbsp; Login</a></b>
+        </div>
+    </mat-card>
+  </div>

@@ -1,0 +1,55 @@
+<div class="jumbotron login-content">
+    
+    <div fxLayout="row wrap" fxLayoutAlign="center center" class="row-height" >
+        <mat-card fxFlex="35%" fxFlex.md="55%" fxFlex.sm="80%" fxFlex.xs="100%" class="login-form">
+            <mat-card-title class="text-center p-4">Sign In</mat-card-title>
+    
+            <mat-card-content fxLayout="column">
+                    <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show">
+                        {{errorMessage}}
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    </div>
+                    <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+    
+                            <div class="form-group">
+                                <!-- appearance="outline" -->
+                                <mat-form-field> 
+                                    <mat-label>Enter Email</mat-label>
+                                    <input matInput  placeholder="Enter  Email" formControlName="email" 
+                                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                                    <mat-icon matSuffix>mail</mat-icon>
+                                    <!-- <span matPrefix><mat-icon>mail</mat-icon></span>&nbsp;&nbsp; -->
+                                    <mat-error *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                        <mat-error *ngIf="f.email.errors.required">Email required</mat-error>
+                                        <mat-error *ngIf="f.email.errors.email">Enter valid email</mat-error>
+                                    </mat-error>
+                                </mat-form-field>
+                              </div>
+    
+    
+                              <div class="form-group">
+                                <mat-form-field>
+                                    <mat-label>Enter Password</mat-label>
+                                    <input matInput  placeholder="Enter Password" [type]="hide ? 'password' : 'text'"   formControlName="password"  
+                                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                                    <!-- <span matPrefix> <mat-icon>lock</mat-icon></span>&nbsp;&nbsp; -->
+                                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    <mat-error *ngIf="submitted && f.password.errors">
+                                        <mat-error *ngIf="f.password.errors.required">Password required</mat-error>
+                                    </mat-error>
+                                </mat-form-field>
+                              </div>
+                    
+                        <div class="float-right">
+                            <button [disabled]="loading" class="btn btn-primary" [disabled]="!loginForm.valid">
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                Login
+                            </button></div>
+                    </form>
+                    <div class="p-2 m-2">I don't have account!. 
+                        <b><a routerLink="/microfi/register" class="text-decoration-none">Sign Up</a></b>
+                    </div>
+            </mat-card-content>
+        </mat-card>
+      </div>
+</div>

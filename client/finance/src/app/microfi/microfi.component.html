@@ -1,0 +1,63 @@
+
+<mat-toolbar class="microfi-toolbar bg-dark text-white">
+	<button mat-icon-button (click)="isExpanded = !isExpanded"><mat-icon>menu</mat-icon></button>
+	<h1 class="pl-3 pr-3">Microfinance</h1>
+</mat-toolbar>
+
+
+<mat-sidenav-container class="microfi-container" autosize>
+	<mat-sidenav #sidenav class="microfi-sidenav" mode="side" opened="true"
+	 (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()">
+
+		<mat-nav-list>
+			<mat-list-item>
+				<mat-icon mat-list-icon>home</mat-icon>
+				<a routerLink="/microfi/home" class="full-width" *ngIf="isExpanded || isShowing">Home</a>
+			</mat-list-item>
+
+			<!-- <mat-list-item>
+				<mat-icon mat-list-icon>table</mat-icon>
+				<a routerLink="/microfi/tables" class="full-width" *ngIf="isExpanded || isShowing">Tables</a>	
+			</mat-list-item> -->
+
+		   <mat-list-item>
+				<mat-icon mat-list-icon>multiline_chart</mat-icon>
+				<a routerLink="/microfi/charts" class="full-width" *ngIf="isExpanded || isShowing">Charts</a>
+			</mat-list-item>
+
+			<mat-list-item>
+				<mat-icon mat-list-icon>rate_review</mat-icon>
+				<a routerLink="/microfi/reviews" class="full-width" *ngIf="isExpanded || isShowing">Reviews</a>
+			</mat-list-item>
+			
+			<mat-list-item>
+				<mat-icon mat-list-icon>report</mat-icon>
+				<a routerLink="/microfi/reports" class="full-width" *ngIf="isExpanded || isShowing">Reports</a>
+			</mat-list-item>
+
+
+			<mat-list-item>
+				<mat-icon mat-list-icon>settings_power</mat-icon>
+				<a (click)="logout()" class="full-width" *ngIf="isExpanded || isShowing">Logout</a>
+			</mat-list-item>
+
+
+			<mat-list-item (click)="showSubmenuThree = !showSubmenuThree" class="parent">
+				<span class="full-width" *ngIf="isExpanded || isShowing">More</span>
+				<mat-icon mat-list-icon>more</mat-icon>
+				<mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenuThree}"
+				*ngIf="isExpanded || isShowing">expand_more</mat-icon>
+			</mat-list-item>
+				<div class="submenu" [ngClass]="{'expanded' : showSubmenuThree}"
+					*ngIf="isShowing || isExpanded">
+					<a mat-list-item href="/microfi/home"> Accounts Settings</a>
+					<a mat-list-item href="/microfi/home">System Settings</a>
+				</div>
+		</mat-nav-list>
+
+	</mat-sidenav>
+	<div class="bg-white">
+		<router-outlet></router-outlet>
+	</div>
+</mat-sidenav-container>
+<app-footer></app-footer>

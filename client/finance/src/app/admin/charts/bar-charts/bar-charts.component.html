@@ -1,0 +1,17 @@
+<div class="jumbotron">
+  <div class="text-right">Bar charts Charts</div><br>
+  <div class="pt-3 pb-3">
+    <div class="chartjs-container">
+      <canvas
+        baseChart
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [legend]="barChartLegend"
+        [chartType]="barChartType"
+      >
+      </canvas>
+    </div>
+  </div>
+</div>

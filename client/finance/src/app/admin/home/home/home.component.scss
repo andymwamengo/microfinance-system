@@ -1,0 +1,86 @@
+/**
+
+*/
+table {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-width: 500px;
+}
+
+.admin-microfi{
+  min-width: 1100px;
+}
+
+th.mat-header-cell {
+  text-align: left;
+  max-width: 300px;
+}
+
+.mat-form-field {
+  font-size: 14px;
+}
+
+.mfi-mat-table {
+  display: flex;
+  flex-direction: column;
+  /* max-height: 500px; */
+}
+.container {
+  background-color: white;
+  border: 1.5px solid black;
+  border-radius: 10px;
+  text-align: center;
+}
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+.container {
+  background-color: white;
+  border: 1.5px solid black;
+  border-radius: 10px;
+  text-align: center;
+}
+.mat-table {
+  background-color: rgba(255, 255, 255, 0.959);
+  /* height : 100vh; */
+  overflow: auto;
+  /* width: 1123px; */
+}
+.mat-header-cell,
+.mat-cell {
+  min-width: 100px;
+  color: black;
+}
+.mat-form-field-underline {
+  background-color: transparent;
+}
+
+.mat-form-field-flex {
+  font-size: 14px;
+  line-height: 1em;
+  color: #555;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 8px;
+  padding: 2px;
+}
+.mat-form-field-wrapper {
+  padding-bottom: 1.25em;
+  padding-top: 1.25em;
+}
+.mat-form-field-infix {
+  border: 0px;
+}
+.mat-paginator {
+  background-color: white;
+  color: black;
+}
+
+.mat-row,
+.mat-header-row {
+  min-width: 2800px;
+  // width: 100%;
+}

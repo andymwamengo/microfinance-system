@@ -1,0 +1,35 @@
+/* Navigation bar style */
+.menu-spacer {
+  flex: 1 1 auto;
+}
+.nav-title {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+/* sidenav style */
+mat-sidenav,
+mat-sidenav.md-locked-open,
+mat-sidenav.md-closed.md-locked-open-add-active {
+  min-width: 200px !important;
+  width: 85vw !important;
+  max-width: 300px !important;
+}
+
+/* RouterLink Hovering Background */
+a:hover {
+  background-color: gray;
+  color: blue;
+}
+a:visited {
+  color: blueviolet;
+}
+
+/* Full width */
+.full-width {
+  width: 100%;
+}
+
+.content-pad{
+  min-height: 80vh;
+}

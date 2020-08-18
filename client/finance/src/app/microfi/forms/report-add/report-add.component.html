@@ -1,0 +1,70 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-dialog-content [formGroup]="reportForm">
+
+  <div class="form-group">
+    <mat-form-field >
+      <mat-label>Enter Assets</mat-label>
+      <input matInput  placeholder="Enter Assets" formControlName="report_assets"  
+      [ngClass]="{ 'is-invalid': submitted && f.report_assets.errors }">
+      <mat-error *ngIf="submitted && f.report_assets.errors" class="invalid-feedback">
+        <mat-error *ngIf="f.report_assets.errors.required">Assets is required</mat-error>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+
+      <div class="form-group">
+        <mat-form-field >
+          <mat-label>Enter Liabilities</mat-label>
+          <input matInput  placeholder="Enter Liabilities" formControlName="report_liability"  
+          [ngClass]="{ 'is-invalid': submitted && f.report_liability.errors }">
+          <mat-error *ngIf="submitted && f.report_liability.errors" class="invalid-feedback">
+            <mat-error *ngIf="f.report_liability.errors.required">Liabilities is required</mat-error>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <div class="form-group">
+        <mat-form-field >
+          <mat-label>Enter Revenue</mat-label>
+          <input matInput  placeholder="Enter Revenue" formControlName="report_revenue"  
+          [ngClass]="{ 'is-invalid': submitted && f.report_revenue.errors }">
+          <mat-error *ngIf="submitted && f.report_revenue.errors" class="invalid-feedback">
+            <mat-error *ngIf="f.report_revenue.errors.required">Revenue is required</mat-error>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <div class="form-group">
+        <mat-form-field >
+          <mat-label>Enter Net Income</mat-label>
+          <input matInput  placeholder="Enter Net Income" formControlName="report_income"  
+          [ngClass]="{ 'is-invalid': submitted && f.report_income.errors }">
+          <mat-error *ngIf="submitted && f.report_income.errors" class="invalid-feedback">
+            <mat-error *ngIf="f.report_income.errors.required">Net Income is required</mat-error>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      
+      <div class="form-group">
+        <mat-form-field >
+          <mat-label>Enter Dividend</mat-label>
+          <input matInput  placeholder="Enter Dividend" formControlName="report_dividend"  
+          [ngClass]="{ 'is-invalid': submitted && f.report_dividend.errors }">
+          <mat-error *ngIf="submitted && f.report_dividend.errors" class="invalid-feedback">
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions class="float-right text-center">
+    <button class="mat-raised-button"   (click)="close()"> Close </button>&nbsp;&nbsp;
+    <button class="mat-raised-button mat-primary"  (click)="saveReport()"> Save </button>
+    <!-- [disabled]="!form.valid" -->
+</mat-dialog-actions>
+

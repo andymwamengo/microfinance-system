@@ -1,0 +1,24 @@
+<!-- Feedback Sction From Admin -->
+<div class="p-2 m-2">
+    <div class="card">
+      <h2 class="card-header">Feedback</h2>
+      <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show">
+        {{errorMessage}}
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+      </div>
+      <div class="admin-feedback card-body">
+        <div *ngIf="feedbacks">
+          <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+          <div *ngFor="let feedback of feedbacks | paginate: { itemsPerPage: 8, currentPage: p }">
+            <p [innerHTML]="feedback.admin_feedback">
+              <br />
+              {{ feedback.date_submitted | date }}
+            </p>
+          </div>
+          <pagination-controls
+            (pageChange)="p = $event"
+          ></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>

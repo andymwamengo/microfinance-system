@@ -1,0 +1,343 @@
+<div>
+  <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show">
+    {{errorMessage}}
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+</div>
+
+  <div *ngIf="!errorMessage">
+    <div *ngIf="loggedUser" class="card mt-4 mb-4">
+      <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+      <div class="card">
+        <div fxFlexFill class="card-header">
+          <div class="text-right text-primary">
+            <h3>
+              {{ loggedUser.mfi_name | uppercase }}
+              {{ loggedUser.mfi_type | uppercase }}
+            </h3>
+          </div>
+        </div>
+        <div>
+          <mat-card fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="end">
+            <div class="child-1"
+              ><button
+                mat-raised-button
+                color="primary"
+                (click)="openAddressDialog()"
+              >
+                Add Address
+              </button></div
+            >
+            <div class="child-2"
+              ><button
+                mat-raised-button
+                color="primary"
+                (click)="openStakeholderDialog()"
+              >
+                Add Stakeholder
+              </button></div
+            >
+            <div class="child-3"
+              ><button
+                mat-raised-button
+                color="primary"
+                (click)="openManagementDialog()"
+              >
+                Add Board
+              </button></div
+            >
+            <div class="child-3"
+              ><button
+                mat-raised-button
+                color="primary"
+                (click)="openReportDialog()"
+              >
+                Add Report
+              </button></div
+            >
+          </mat-card>
+    
+          <!-- Microfinance details Page -->
+          <div class="card-body">
+            <b class="font-weight-bolder">Microfinance Details:</b>
+            <p>
+              <b>Microfinance Type: </b> {{ this.loggedUser.mfi_type | uppercase }}
+            </p>
+            <p><b>Microfinance Name: </b> {{ this.loggedUser.mfi_name }}</p>
+            <p><b>Microfinance Email: </b> {{ this.loggedUser.email }}</p>
+            <p><b>Microfinance License: </b> {{ this.loggedUser.mfi_license }}</p>
+            <p>
+              <b>Microfinance Technology: </b> {{ this.loggedUser.mfi_technology }}
+            </p>
+            <p><b>Microfinance Service: </b> {{ this.loggedUser.mfi_service }}</p>
+            <p><b>Microfinance Assets: </b>{{ this.loggedUser.mfi_assets }}</p>
+            <p>
+              <b>Microfinance Liability: </b>{{ this.loggedUser.mfi_liability }}
+            </p>
+    
+            <p>
+              <button
+                class="btn btn-primary"
+                (click)="
+                  updateMfi(
+                    this.loggedUser.id,
+                    this.loggedUser.mfi_name,
+                    this.loggedUser.mfi_license,
+                    this.loggedUser.mfi_service,
+                    this.loggedUser.mfi_technology,
+                    this.loggedUser.mfi_assets,
+                    this.loggedUser.mfi_liability,
+                    this.loggedUser.email
+                  )
+                "
+              >
+                Update
+              </button>
+            </p>
+          </div>
+          <hr />
+          <!-- Mfi Address Review -->
+          <div class="">
+            <div class="card">
+              <b class="card-header">Location Information</b>
+              <div class="mfi-address card-body">
+                <div *ngIf="addresses">
+                  <div
+                    *ngIf="loading"
+                    class="spinner-border spinner-border-sm"
+                  ></div>
+                  <div *ngFor="let address of addresses">
+                    <p>Address: {{ address.address_office }}</p>
+                    <p>District: {{ address.address_district }}</p>
+                    <p>Region: {{ address.address_region }}</p>
+                    <p>P.O.Box: {{ address.address_pobox }}</p>
+                    <p>Phone Number: {{ address.addres_phone_number }}</p>
+                    <p>
+                      Website:
+                      <a href="{{ address.address_website }}" target="blank"
+                        >{{ this.loggedUser.mfi_name }}
+                        {{ this.loggedUser.mfi_type }}
+                      </a>
+                    </p>
+                    <p>
+                      <button
+                        class="btn btn-primary m-2"
+                        (click)="
+                          updateMfiAddress(
+                            address.id,
+                            this.address.address_office,
+                            this.address.address_district,
+                            this.address.address_region,
+                            this.address.address_pobox,
+                            this.address.addres_phone_number,
+                            this.address.address_website
+                          )
+                        "
+                      >
+                        Update
+                      </button>
+    
+                      <button
+                        class="btn btn-danger m-2"
+                        (click)="deleteMfiAddress(address.id)"
+                      >
+                        delete
+                      </button>
+                    </p>
+                  </div>
+                </div>
+                <div *ngIf="!addresses">
+                  <b>No data to show</b>
+                </div>
+              </div>
+            </div>
+            <!-- Mfi Board members Review -->
+            <div class="card">
+              <b class="card-header">Board Members</b>
+              <div class="mfi-board card-body">
+                <div *ngIf="boards">
+                  <div
+                    *ngIf="loading"
+                    class="spinner-border spinner-border-sm"
+                  ></div>
+                  <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <!-- <th scope="col">No:</th> -->
+                          <th scope="col">First Name</th>
+                          <th scope="col">Middle Name</th>
+                          <th scope="col">Last Name</th>
+                          <th scope="col">Email</th>
+                          <th scope="col">Phone No:</th>
+                          <th scope="col">Citizenship</th>
+                          <th scope="col">Position</th>
+                          <th scope="col">Update</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let board of boards">
+                          <!-- <th scope="row">{{ board.id }}</th> -->
+                          <td>{{ board.board_first_name }}</td>
+                          <td>{{ board.board_middle_name }}</td>
+                          <td>{{ board.board_last_name }}</td>
+                          <td>{{ board.board_email }}</td>
+                          <td>{{ board.board_phone_number }}</td>
+                          <td>{{ board.board_citizenship }}</td>
+                          <td>{{ board.board_position }}</td>
+                          <td>
+                            <button
+                              class="btn btn-primary"
+                              (click)="
+                                updateMfiBoard(
+                                  board.id,
+                                  this.board.board_first_name,
+                                  this.board.board_middle_name,
+                                  this.board.board_last_name,
+                                  this.board.board_email,
+                                  this.board.board_phone_number,
+                                  this.board.board_citizenship,
+                                  this.board.board_position
+                                )
+                              "
+                            >
+                              Update
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div *ngIf="!boards">No data to show</div>
+              </div>
+            </div>
+          </div>
+          <hr />
+    
+          <!--Mfi Stakeholder Review -->
+          <div class="">
+            <div class="card">
+              <b class="card-header">Stakeholder</b>
+              <div class="mfi-stakeholder card-body">
+                <div *ngIf="stakeholders">
+                  <div
+                    *ngIf="loading"
+                    class="spinner-border spinner-border-sm"
+                  ></div>
+                  <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <!-- <th scope="col">No:</th> -->
+                          <th scope="col">First Name</th>
+                          <th scope="col">Middle Name</th>
+                          <th scope="col">Last Name</th>
+                          <th scope="col">Email</th>
+                          <th scope="col">Phone No:</th>
+                          <th scope="col">Citizenship</th>
+                          <th scope="col">Share</th>
+                          <th scope="col">Update</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let stakeholder of stakeholders">
+                          <!-- <th scope="row">{{ stakeholder.id }}</th> -->
+                          <td>{{ stakeholder.stake_first_name }}</td>
+                          <td>{{ stakeholder.stake_middle_name }}</td>
+                          <td>{{ stakeholder.stake_last_name }}</td>
+                          <td>{{ stakeholder.stake_email }}</td>
+                          <td>{{ stakeholder.stake_phone_number }}</td>
+                          <td>{{ stakeholder.stake_citizenship }}</td>
+                          <td>{{ stakeholder.stake_share }}</td>
+                          <td>
+                            <button
+                              class="btn btn-primary"
+                              (click)="
+                                updateMfiStakeholder(
+                                  stakeholder.id,
+                                  this.stakeholder.stake_first_name,
+                                  this.stakeholder.stake_middle_name,
+                                  this.stakeholder.stake_last_name,
+                                  this.stakeholder.stake_email,
+                                  this.stakeholder.stake_phone_number,
+                                  this.stakeholder.stake_citizenship,
+                                  this.stakeholder.stake_share
+                                )
+                              "
+                            >
+                              Update
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+    
+                <div *ngIf="!stakeholders">No data to show</div>
+              </div>
+            </div>
+            <!-- Mfi Reports Review -->
+            <div class="card">
+              <b class="card-header">Reports</b>
+              <div class="mfi-report card-body">
+                <div *ngIf="reports">
+                  <div
+                    *ngIf="loading"
+                    class="spinner-border spinner-border-sm"
+                  ></div>
+                  <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <!-- <th scope="col">No:</th> -->
+                          <th scope="col">Assets</th>
+                          <th scope="col">Liability</th>
+                          <th scope="col">Revenue</th>
+                          <th scope="col">Income</th>
+                          <th scope="col">Dividend</th>
+                          <th scope="col">Date</th>
+                          <th scope="col">Update</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let report of reports">
+                          <!-- <th scope="row">{{ report.id }}</th> -->
+                          <td>{{ report.report_assets }}</td>
+                          <td>{{ report.report_liability }}</td>
+                          <td>{{ report.report_revenue }}</td>
+                          <td>{{ report.report_income }}</td>
+                          <td>{{ report.report_dividend }}</td>
+                          <td>{{ report.date_updated | date }}</td>
+                          <td>
+                            <button
+                              class="btn btn-primary"
+                              (click)="
+                                updateMfiReport(
+                                  report.id,
+                                  this.report.report_assets,
+                                  this.report.report_liability,
+                                  this.report.report_revenue,
+                                  this.report.report_income,
+                                  this.report.report_dividend
+                                )
+                              "
+                            >
+                              Update
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div *ngIf="!reports">No data to show</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>

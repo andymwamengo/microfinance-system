@@ -1,0 +1,161 @@
+<!-- Footer -->
+<div class="text-white text-center">
+  <div
+    class="bg-dark pt-4"
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutGap="10px"
+  >
+    <div fxFlex="25%;" fxFlex.xs="80%" fxFlexFill>
+      <h3 class="text-center font-weight-bolder">Description</h3>
+      <p class="text-left">
+        Microfinance Monitoring System is the system that provides a way of
+        controlling Microfinance Institutions in Tanzania.
+      </p>
+    </div>
+    <div fxFlex="25%;" fxFlex.xs="80%" fxFlexFill>
+      <h3 class="text-center font-weight-bolder">Related Links</h3>
+      <ul class="list-unstyled">
+        <li>
+          <a routerLink="" routerLinkActive="active" class="text-light text-decoration-none"
+            >World Bank</a
+          >
+        </li>
+        <li>
+          <a routerLink="related" routerLinkActive="active" class="text-light text-decoration-none"
+            >Promotions</a
+          >
+        </li>
+        <li>
+          <a routerLink="/contact" routerLinkActive="active" class="text-light text-decoration-none"
+            >Contact Us</a
+          >
+        </li>
+        <li>
+          <a routerLink="/about" routerLinkActive="active" class="text-light text-decoration-none"
+            >About Us</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div fxFlex="25%;" fxFlex.xs="80%" fxFlexFill>
+      <h3 class="text-center font-weight-bolder">Support</h3>
+      <ul class="list-unstyled">
+        <li>
+          <a routerLink="statistics" class="text-light text-decoration-none"
+            >Statistics Service</a
+          >
+        </li>
+        <li>
+          <a routerLink="#" class="text-light text-decoration-none"
+            >Savings and Cooperation</a
+          >
+        </li>
+        <li>
+          <a routerLink="bureau" class="text-light text-decoration-none"
+            >Foreign Exchange</a
+          >
+        </li>
+        <li>
+          <a routerLink="#" class="text-light text-decoration-none"
+            >Partners and Others</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div fxFlex="25%;" fxFlex.xs="80%" fxFlexFill>
+      <h3 class="text-center font-weight-bolder">About Us</h3>
+      <ul class="list-unstyled">
+        <li>
+          <a routerLink="" class="text-light text-decoration-none"
+            >Bank of Tanzania</a
+          >
+        </li>
+        <li>
+          <a routerLink="" class="text-light text-decoration-none"
+            >Microfinance Institutions</a
+          >
+        </li>
+        <li>
+          <a routerLink="" class="text-light text-decoration-none"
+            >Office and Location</a
+          >
+        </li>
+        <li>
+          <a routerLink="" class="text-light text-decoration-none"
+            >Communication and Others
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!--  -->
+  <div
+    class="bg-dark pt-3 pb-3 text-center"
+    fxLayout="row"
+    fxLayout.xs="column"
+  >
+    <div fxFlex="100%;" fxFlex.xs="80%" fxFlexFill>
+      <b>
+        Welcome to Microfinance Monitoring System!, You can provide a Feedback
+        Now!.
+        <button
+          (click)="openUserFeedbackDialog()"
+          class="btn btn-primary btn-rounded"
+        >
+          Feedback
+        </button>
+      </b>
+    </div>
+  </div>
+
+  <!--  -->
+  <!--  -->
+  <div class="bg-dark text-center font-weight-bolder pt-1 pb-3"
+    fxLayout="row" fxLayout.xs="column">
+    <div fxFlex="100%;" fxFlex.xs="100%" fxFlexFill>
+
+      <ul class=" text-center">
+
+        <li class="list-inline-item">
+          <a class="btn-floating btn-fb m-2 pl-2 pr-2" href="https://web.facebook.com/BankOfTanzaniaOfficial?_rdc=1&_rdr" target="_blank">
+            <img src="../../../assets/images/social-icons/Facebook.png" width="30px" height="30px" alt="loading"
+            class="rounded float-right img-fluid"/>
+          </a>
+        </li>
+
+        <li class="list-inline-item">
+          <a class="btn-floating btn-tw m-2 pl-2 pr-2" href="https://twitter.com/BankOfTanzania" target="_blank">
+            <!-- <i class="fab fa-twitter" style="font-size: 25px;"> </i> -->
+            <img src="../../../assets/images/social-icons/twitter.png" width="30px" height="30px" alt="loading"
+            class="rounded float-right img-fluid"/>
+          </a>
+        </li>
+
+        <li class="list-inline-item">
+          <a class="btn-floating btn-dribbble m-2 pl-2 pr-2" href="https://www.youtube.com/channel/UCML8A0jRIu8csMXjEI8o-ZQ" target="_blank">
+            <img src="../../../assets/images/social-icons/Youtube.png" width="30px" height="30px" alt="loading"
+            class="rounded float-right img-fluid"/>
+          </a>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+
+  <!--  -->
+  <div
+    class="bg-secondary pb-2 pt-2 text-center"
+    fxLayout="row"
+    fxLayout.xs="column"
+  >
+    <div fxFlex="100%;" fxFlex.xs="80%" fxFlexFill>
+      <footer>
+        <p>Copyright: ©2020 - {{ copyright }} Bank of Tanzania</p>
+        <p>All right reserved</p>
+      </footer>
+    </div>
+  </div>
+</div>

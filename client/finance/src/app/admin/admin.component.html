@@ -1,0 +1,67 @@
+
+<mat-toolbar class="admin-toolbar bg-dark text-white">
+	<button mat-icon-button (click)="isExpanded = !isExpanded"><mat-icon>menu</mat-icon></button>
+	<h1 class="p-3 m-3">Admin</h1>
+</mat-toolbar>
+
+
+<mat-sidenav-container class="admin-container" autosize>
+	<mat-sidenav #sidenav class="admin-sidenav" mode="side" opened="true"
+	 (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()">
+
+		<mat-nav-list style="max-width: 300px;">
+			<mat-list-item>
+				<mat-icon mat-list-icon>home</mat-icon>
+				<a routerLink="/admin/home" class="full-width pl-2 pr-5" *ngIf="isExpanded || isShowing">Home</a>
+			</mat-list-item>
+
+			<!-- <mat-list-item>
+				<mat-icon mat-list-icon>table_chart</mat-icon>
+				<a routerLink="/admin/tables" class="full-width pl-2 pr-5" *ngIf="isExpanded || isShowing">Tables</a>
+			</mat-list-item> -->
+
+		   <mat-list-item>
+			   <mat-icon mat-list-icon>multiline_chart</mat-icon>
+			<a routerLink="/admin/charts" class="full-width pl-2 pr-5" *ngIf="isExpanded || isShowing">Charts</a>
+		</mat-list-item>
+
+		<mat-list-item>
+			<mat-icon mat-list-icon>rate_review</mat-icon>
+			<a routerLink="/admin/reviews" class="full-width pl-2 pr-5" *ngIf="isExpanded || isShowing">Reviews</a>
+			
+		</mat-list-item>
+		
+		<mat-list-item>
+			<mat-icon mat-list-icon>report</mat-icon>
+			<a routerLink="/admin/reports" class="full-width pl-2 pr-5" *ngIf="isExpanded || isShowing">Reports</a>
+			
+		</mat-list-item>
+
+
+		<mat-list-item>
+			<mat-icon mat-list-icon>settings_power</mat-icon>
+			<a (click)="logout()" class="full-width pl-2 pr-5" *ngIf="isExpanded || isShowing">Logout</a>
+		</mat-list-item>
+
+	   <mat-list-item (click)="showSubmenuThree = !showSubmenuThree" class="parent">
+		<span class="full-width" *ngIf="isExpanded || isShowing">More</span>
+		<mat-icon mat-list-icon>more</mat-icon>
+		<mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenuThree}"
+		 *ngIf="isExpanded || isShowing">expand_more</mat-icon>
+		</mat-list-item>
+
+			<div class="submenu" [ngClass]="{'expanded' : showSubmenuThree}"
+			*ngIf="isShowing || isExpanded">
+			<a mat-list-item href="/admin/home">Accounts Settings</a>
+			<a mat-list-item href="/admin/home">System Settings</a>
+			</div>
+
+		</mat-nav-list>
+	</mat-sidenav>
+
+	<div>
+		<router-outlet></router-outlet>
+	</div>
+
+</mat-sidenav-container>
+<app-footer></app-footer>

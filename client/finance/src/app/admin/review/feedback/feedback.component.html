@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show">
+  {{errorMessage}}
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+</div>
+
+<mat-dialog-content [formGroup]="adminReportForm">
+    
+  <div class="form-group">
+    <quill-editor
+    [styles]="{height: '150px'}" 
+    (onEditorChanged)="triggerChangeDetection()"
+      matInput
+      placeholder="Enter Admin Feedback "
+      formControlName="admin_feedback"
+      [ngClass]="{ 'is-invalid': submitted && f.admin_feedback.errors }"
+    >
+    </quill-editor>
+    <div *ngIf="submitted && f.admin_feedback.errors" class="invalid-feedback">
+      <div *ngIf="f.admin_feedback.errors.required">Admin Feedback  is required</div>
+    </div>
+  </div>
+
+  <div class="p-2" [innerHTML]="this.adminReportForm.value.admin_feedback"></div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions class="float-right text-center">
+    <button class="mat-raised-button"   (click)="close()"> Close </button>&nbsp;&nbsp;
+    <button class="mat-raised-button mat-primary"  (click)="saveFeedback()"> Save </button>
+</mat-dialog-actions>
+

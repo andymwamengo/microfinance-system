@@ -1,0 +1,54 @@
+<div class="card m-2 p-2">
+  <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show">
+    {{errorMessage}}
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  </div>
+  
+       <h2 class="card-header text-right">User Feedback</h2>
+       <div class="card-body">
+           <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+           <div *ngIf="userFeedback">
+               <div *ngFor="let feedback of userFeedback | paginate: { id: 'listing_pagination',
+                   itemsPerPage: 8, currentPage: page, totalItems: total }">
+                   <p [innerHTML]="feedback.user_feedback"> 
+                     
+                           <strong>from 
+                               {{feedback.user_email}} 
+                               {{feedback.user_first_name}}
+                               {{feedback.user_last_name}}
+                           </strong>
+                       
+                   </p>
+               </div>
+           </div>
+       <pagination-controls  id="listing_pagination" maxSize="5" directionLinks="true" 
+               (pageChange)="page = $event"></pagination-controls>
+       </div>
+  </div>
+
+  <div class="card m-2 p-2">
+    <h2 class="card-header text-right">Trending Issues</h2>
+      <div class="card-body">
+        <p>
+          golang rustlang python typescript html css java c++ c dart
+          Monetary Policy
+          Monetary policy consists of decisions and actions taken by the Central Bank to ensure that the supply of money in the economy is consistent with growth..
+          Read more..
+           Financial Sector Supervision
+          Bank of Tanzania is mandated to license, regulate, supervise and de-license banks, financial institutions and Bureaus de change. Financial Institutions...
+          Read more..
+           Payment & Settlement Systems
+          The Bank of Tanzania is empowered by the National Payment Systems (NPS) Act 2015 ...
+          Read more..
+           Financial Markets
+          The Bank of Tanzania is involved in money, bonds and foreign exchange markets geared towards implementation of monetary policy, ensuring that ..
+          Read more..
+           Currency Issuance
+          The Bank is mandated under the Bank of Tanzania Act, 2006 to have the sole right to issue banknotes and coins in and for Tanzania, which shall be the only...
+          Read more..
+           Banking Services
+          Bank of Tanzania is a banker and fiscal agent to the Government of the United Republic of Tanzania and to the Revolutionary Government of Zanzibar...
+          Read more..
+        </p>
+      </div>
+  </div>
