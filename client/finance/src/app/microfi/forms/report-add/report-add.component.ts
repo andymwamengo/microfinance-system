@@ -60,17 +60,33 @@ export class ReportAddComponent implements OnInit {
       this.mfiService.registerMfiReport(this.reportForm.value).subscribe(
         (resp) => {
           console.log(resp);
-          this.toastMessage.showError(
-            'Institutional report added successfully',
+          this.toastMessage.showSuccess(
+            `Institutional report added successfully ${resp}`,
             'Institution panel'
           );
           this.dialogRef.close();
           this.router.navigate(['/microfi/reports/']);
         },
         (error) => {
-          console.log(error);
           this.toastMessage.showError(
-            'Failed to add report, try again',
+            `Failed to add report, try again ${error}`,
+            'Institution panel'
+          );
+        }
+      );
+
+      // to prediction panel
+      this.mfiService.sendPredictionReport(this.reportForm.value).subscribe(
+        (resp) => {
+          this.toastMessage.showSuccess(
+            `Institution address added successfully ${resp}`,
+            'Institution panel'
+          );
+          this.dialogRef.close();
+        },
+        (error) => {
+          this.toastMessage.showError(
+            `Failed to add address, try again ${error}`,
             'Institution panel'
           );
         }

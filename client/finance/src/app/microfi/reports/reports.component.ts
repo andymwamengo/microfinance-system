@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  MfiReport,
-  Board,
-  Address,
-  Stakeholder,
-} from 'src/app/share/model/models';
+
 import { MicrofiService } from '../service/microfi.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
-import { Microfi } from '../../share/model/models';
-import { AuthService } from '../../share/security/service/auth.service';
-import { AdminService } from '../../admin/service/admin.service';
+import {
+  Microfi,
+  PredictReport,
+  Board,
+  Address,
+  MfiReport,
+  Stakeholder,
+} from '../../share/model/models';
 import { ToastService } from '../../share/message/service/toast.service';
 import { ReportEditComponent } from '../forms/report-edit/report-edit.component';
 
@@ -19,7 +19,7 @@ import { ReportEditComponent } from '../forms/report-edit/report-edit.component'
   selector: 'app-reports',
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.scss'],
-  providers: [MicrofiService, AuthService, ToastService],
+  providers: [MicrofiService, ToastService],
 })
 export class ReportsComponent implements OnInit {
   // Mfi model imports
@@ -28,6 +28,7 @@ export class ReportsComponent implements OnInit {
   addresses: Address[];
   reports: MfiReport[];
   stakeholders: Stakeholder[];
+  prediction: PredictReport[];
   errorMessage = '';
 
   // Loading data
@@ -38,12 +39,12 @@ export class ReportsComponent implements OnInit {
 
   constructor(
     public mfiService: MicrofiService,
-    private authService: AuthService,
-    private adminService: AdminService,
     private dialog: MatDialog,
     private router: Router,
     private toastMessage: ToastService
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     // Find all mfi reports
     this.loading = true;
     this.mfiService
@@ -56,12 +57,26 @@ export class ReportsComponent implements OnInit {
           this.total = this.reports.length;
         },
         (error) => {
-         this.errorMessage = error;
+          this.errorMessage = error;
+        }
+      );
+
+    // Find all mfi reports
+    this.loading = true;
+    this.mfiService
+      .getPredictionReport()
+      .pipe(first())
+      .subscribe(
+        (resr) => {
+          this.loading = false;
+          this.prediction = resr;
+          this.total = this.reports.length;
+        },
+        (error) => {
+          this.errorMessage = error;
         }
       );
   }
-
-  ngOnInit(): void {}
 
   /**
    * update Mfi Report

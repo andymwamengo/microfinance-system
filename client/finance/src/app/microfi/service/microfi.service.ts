@@ -16,7 +16,7 @@ import {
   Board,
   MfiReport,
 } from 'src/app/share/model/models';
-import { Microfi, License } from '../../share/model/models';
+import { Microfi, License, PredictReport } from '../../share/model/models';
 
 @Injectable({
   providedIn: 'root',
@@ -210,6 +210,36 @@ export class MicrofiService {
     return this.httpClient.patch(url, report, this.httpOptions).pipe(
       tap((_) => this.log(`updated report id=`)),
       catchError(this.handleError<any>('updateReport'))
+    );
+  }
+
+
+  /** POST: add a new Microfi report to the server */
+  sendPredictionReport(prediction: MfiReport): Observable<MfiReport> {
+    const url = `${environment.apiUrl}` + '/mms/mfi/predict/';
+    return this.httpClient.post<MfiReport>(url, prediction, this.httpOptions).pipe(
+      tap(
+        (newReport: MfiReport) => this.log(`added mfi Predictions w/ id`)
+      ),
+      catchError(this.handleError<MfiReport>('addPredict'))
+    );
+  }
+
+  /** GET Microfi report from the server */
+  getPredictionReport(): Observable<MfiReport[]> {
+    const url = `${environment.apiUrl}` + '/mms/mfi/predict/';
+    return this.httpClient.get<MfiReport[]>(url).pipe(
+      tap((_) => this.log('fetched mfi Predict')),
+      catchError(this.handleError<MfiReport[]>('getPredict', []))
+    );
+  }
+
+  /** PATCH: update the Mfi Report on the server */
+  updatePredictionReport(id: any, prediction: MfiReport): Observable<any> {
+    const url = `${environment.apiUrl}/mms/mfi/predict/${id}`;
+    return this.httpClient.patch(url, prediction, this.httpOptions).pipe(
+      tap((_) => this.log(`updated Predict id=`)),
+      catchError(this.handleError<any>('updatePredict'))
     );
   }
 

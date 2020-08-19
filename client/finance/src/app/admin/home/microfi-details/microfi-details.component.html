@@ -186,6 +186,44 @@
             <div *ngIf="!reports">No data to show</div>
           </div>
         </div>
+        <!-- Mfi Reports Review -->
+        <div class="card">
+          <b class="card-header">Institutions Predctions</b>
+          <div class="mfi-report card-body">
+            <div *ngIf="reports">
+              <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+              <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <!-- <th scope="col">No:</th> -->
+                      <th scope="col">Assets</th>
+                      <th scope="col">Liability</th>
+                      <th scope="col">Revenue</th>
+                      <th scope="col">Income</th>
+                      <th scope="col">Prediction</th>
+                      <th scope="col">Confidence</th>
+                      <th scope="col">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let pred of prediction">
+                      <!-- <th scope="row">{{ report.id }}</th> -->
+                      <td>{{ pred.report_assets }}</td>
+                      <td>{{ pred.report_liability }}</td>
+                      <td>{{ pred.report_revenue }}</td>
+                      <td>{{ pred.report_income }}</td>
+                      <td>{{ pred.prediction }}</td>
+                      <td>{{ pred.confidence_score }}</td>
+                      <td>{{ pred.created_date | date }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div *ngIf="!reports">No data to show</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

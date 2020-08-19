@@ -96,7 +96,7 @@ DATABASES = {
         'HOST': '127.0.0.1',
         'PORT': '5432',
         'TEST': {
-            'NAME': 'microfinanceTestatabase',
+            'NAME': 'microfinanceTestDatabase',
         },
     }
 }
@@ -109,7 +109,7 @@ REST_FRAMEWORK = {
     # Renderer classes for the API
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
-        # 'rest_framework.renderers.BrowsableAPIRenderer',  # For browsable REST API
+        'rest_framework.renderers.BrowsableAPIRenderer',  # For browsable REST API
     ),
     # API permissions
     'DEFAULT_PERMISSION_CLASSES': (
@@ -173,7 +173,7 @@ CACHES = {
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
-CACHE_TTL = 60 * 5
+CACHE_TTL = 60*1
 
 
 # Password validation

@@ -1,34 +1,33 @@
 """
 django rest microfinance views with permission classes
 """
-from institution.apps import InstitutionConfig
+
+import numpy as np
+from django.conf import settings
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
+from django.db.models import Count
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from rest_framework import status, permissions, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
-import numpy as np
 
-from django.utils.decorators import method_decorator
-from django.views.decorators.cache import cache_page
-from django.views.decorators.vary import vary_on_cookie
-from django.conf import settings
-from django.core.cache.backends.base import DEFAULT_TIMEOUT
+from .apps import InstitutionConfig
+from .models import (User, MfiStakeholder, AdminFeedback,
+                     UserFeedback, MfiReport, MfiBoard, MfiAddress,
+                     MfiFeedback, IncomePrediction)
+from .permissions import IsSuperUser, IsOwner, SuperUserPermission
+from .serializers import (CustomTokenObtainPairSerializer, CustomUserSerializer,
+                          UserDetailsSerializer,
+                          MfiStakeholderSerializer, AdminFeedbackSerializer,
+                          UserFeedbackSerializer,
+                          MfiReportSerializer, MfiAddressSerializer,
+                          MfiBoardSerializer,
+                          MfiFeedbackSerializer, IncomePredictionSerializer)
+
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
-from django.db.models import Count, Sum
-
-
-from institution.permissions import IsOwnerOrReadOnly, IsSuperUser, IsOwner, SuperUserPermission
-from institution.models import (User, MfiStakeholder, AdminFeedback,
-                                UserFeedback, MfiReport, MfiBoard, MfiAddress,
-                                 MfiFeedback, IcomePrediction)
-from institution.serializers import (CustomTokenObtainPairSerializer, CustomUserSerializer,
-                                    UserDetailsSerializer,
-                                     MfiStakeholderSerializer, AdminFeedbackSerializer,
-                                      UserFeedbackSerializer,
-                                     MfiReportSerializer, MfiAddressSerializer,
-                                      MfiBoardSerializer,
-                                     MfiFeedbackSerializer, IcomePredictionSerializer)
 
 
 # Obtain token pair view
@@ -47,7 +46,7 @@ class CustomUserCreateView(APIView):
     def post(self, request):
         user_email = request.data
         if User.objects.filter(email=user_email):
-            return Response(status=status.HTTP_409_CREATED)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -56,7 +55,7 @@ class CustomUserCreateView(APIView):
 
 # List all Mfi|Users APIView
 class CustomUsersListAPIView(APIView):
-    permission_classes = (permissions.AllowAny, )
+    permission_classes = (permissions.AllowAny,)
 
     # mfi list view with filter with cache
     def get(self, request, **kwargs):
@@ -64,7 +63,7 @@ class CustomUsersListAPIView(APIView):
             is_staff=False, is_superuser=False).exclude()
         serializer_class = UserDetailsSerializer(user_d, many=True)
         return Response(serializer_class.data)
-    
+
     @method_decorator(cache_page(CACHE_TTL))
     def dispatch(self, *args, **kwargs):
         return super(CustomUsersListAPIView, self).dispatch(*args, **kwargs)
@@ -106,7 +105,7 @@ class MfiAddressView(APIView):
         addresses = MfiAddress.objects.filter(owner=self.request.user)
         serializer = MfiAddressSerializer(addresses, many=True)
         return Response(serializer.data)
-    
+
     @method_decorator(cache_page(CACHE_TTL))
     def dispatch(self, *args, **kwargs):
         return super(MfiAddressView, self).dispatch(*args, **kwargs)
@@ -135,7 +134,7 @@ class MfiStakeholderAPIView(APIView):
         stakeholders = MfiStakeholder.objects.filter(owner=self.request.user)
         serializer = MfiStakeholderSerializer(stakeholders, many=True)
         return Response(serializer.data)
-    
+
     @method_decorator(cache_page(CACHE_TTL))
     def dispatch(self, *args, **kwargs):
         return super(MfiStakeholderAPIView, self).dispatch(*args, **kwargs)
@@ -164,7 +163,7 @@ class MfiBoardView(APIView):
         board = MfiBoard.objects.filter(owner=self.request.user)
         serializer = MfiBoardSerializer(board, many=True)
         return Response(serializer.data)
-    
+
     @method_decorator(cache_page(CACHE_TTL))
     def dispatch(self, *args, **kwargs):
         return super(MfiBoardView, self).dispatch(*args, **kwargs)
@@ -193,7 +192,7 @@ class MfiReportView(APIView):
         reports = MfiReport.objects.filter(owner=self.request.user)
         serializer = MfiReportSerializer(reports, many=True)
         return Response(serializer.data)
-    
+
     @method_decorator(cache_page(CACHE_TTL))
     def dispatch(self, *args, **kwargs):
         return super(MfiReportView, self).dispatch(*args, **kwargs)
@@ -221,7 +220,7 @@ class MfiFeedbackView(APIView):
         feedback = MfiFeedback.objects.all()
         serializer = MfiFeedbackSerializer(feedback, many=True)
         return Response(serializer.data)
-    
+
     @method_decorator(cache_page(CACHE_TTL))
     def dispatch(self, *args, **kwargs):
         return super(MfiFeedbackView, self).dispatch(*args, **kwargs)
@@ -245,7 +244,7 @@ class UserFeedbackView(generics.ListCreateAPIView):
         feedback = UserFeedback.objects.all()
         serializer = UserFeedbackSerializer(feedback, many=True)
         return Response(serializer.data)
-    
+
     @method_decorator(cache_page(CACHE_TTL))
     def dispatch(self, *args, **kwargs):
         return super(UserFeedbackView, self).dispatch(*args, **kwargs)
@@ -263,7 +262,7 @@ class AdminFeedbackView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
-        permission_classes= [permissions.IsAdminUser]
+        permission_classes = [permissions.IsAdminUser]
         serializer = AdminFeedbackSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save(owner=self.request.user)
@@ -274,7 +273,7 @@ class AdminFeedbackView(APIView):
         admin_f = AdminFeedback.objects.all()
         serializer = AdminFeedbackSerializer(admin_f, many=True)
         return Response(serializer.data)
-    
+
     @method_decorator(cache_page(CACHE_TTL))
     def dispatch(self, *args, **kwargs):
         return super(AdminFeedbackView, self).dispatch(*args, **kwargs)
@@ -287,42 +286,42 @@ class AdminFeedbackDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = AdminFeedbackSerializer
 
 
+# Prediction view for input data
 class PredictionAPIView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
         try:
-            age = request.data.get('age', None)
-            bs_fast = request.data.get('bs_fast', None)
-            bs_pp = request.data.get('bs_pp', None)
-            plasma_r = request.data.get('plasma_r', None)
-            plasma_f = request.data.get('plasma_f', None)
-            hbA1c = request.data.get('hbA1c', None)
-            fields = [age, bs_fast, bs_pp, plasma_r, plasma_f, hbA1c]
+            report_assets = request.data.get('report_assets', None)
+            report_liability = request.data.get('report_liability', None)
+            report_revenue = request.data.get('report_revenue', None)
+            report_income = request.data.get('report_income', None)
+
+            fields = [report_assets, report_liability,
+                      report_revenue, report_income]
+
             if not None in fields:
                 # Datapreprocessing Convert the values to float
-                age = float(age)
-                bs_fast = float(bs_fast)
-                bs_pp = float(bs_pp)
-                plasma_r = float(plasma_r)
-                plasma_f = float(plasma_f)
-                hbA1c = float(hbA1c)
-                result = [age, bs_fast, bs_pp, plasma_r, plasma_f, hbA1c]
+                report_assets = float(report_assets)
+                report_liability = float(report_liability)
+                report_revenue = float(report_revenue)
+                report_income = float(report_income)
+
+                result = [report_assets, report_liability,
+                          report_revenue, report_income]
                 # print("The result of input ", result)
 
                 classifier = InstitutionConfig.classifier
 
                 prediction = classifier.predict([result])[0]
-                conf_score = np.max(classifier.predict_proba([result]))*100
+                conf_score = np.max(classifier.predict_proba([result])) * 100
                 predictions = {
-                    'input_age': age,
-                    'input_fast': bs_fast,
-                    'input_pp': bs_pp,
-                    'input_r': plasma_r,
-                    'input_f': plasma_f,
-                    'input_hbA1c': hbA1c,
+                    'report_assets': report_assets,
+                    'report_liability': report_liability,
+                    'report_revenue': report_revenue,
+                    'report_income': report_income,
                     'error': '0',
-                    'message': 'Successfull',
+                    'message': 'Successful',
                     'prediction': prediction,
                     'confidence_score': conf_score
                 }
@@ -337,17 +336,17 @@ class PredictionAPIView(APIView):
                 "message": str(e)
             }
 
-        serializer = IcomePredictionSerializer(data=predictions)
+        serializer = IncomePredictionSerializer(data=predictions)
         if serializer.is_valid(raise_exception=True):
             serializer.save(owner=self.request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, **kwargs):
-        predicts = IcomePrediction.objects.all()
-        serializer = IcomePredictionSerializer(predicts, many=True)
+        predicts = IncomePrediction.objects.all()
+        serializer = IncomePredictionSerializer(predicts, many=True)
         return Response(serializer.data)
-    
+
     @method_decorator(cache_page(CACHE_TTL))
     def dispatch(self, *args, **kwargs):
         return super(PredictionAPIView, self).dispatch(*args, **kwargs)
@@ -355,14 +354,14 @@ class PredictionAPIView(APIView):
 
 #  A view that returns the count of active Institutions.
 class UserTotalCountView(APIView):
-    permission_classes = (permissions.AllowAny, )
+    permission_classes = (permissions.AllowAny,)
     serializer_class = AdminFeedbackSerializer
 
-    def get(self, request, format=None):
+    def get(self):
         total = User.objects.count()
         content = ['total', total]
         return Response(content)
-    
+
     @method_decorator(cache_page(CACHE_TTL))
     def dispatch(self, *args, **kwargs):
         return super(UserTotalCountView, self).dispatch(*args, **kwargs)
@@ -370,14 +369,14 @@ class UserTotalCountView(APIView):
 
 # A view for counting list of institution types
 class UserTypeCountView(APIView):
-    permission_classes = (permissions.AllowAny, )
+    permission_classes = (permissions.AllowAny,)
 
-    def get(self, request, format=None):
-        category = User.objects.all().values('mfi_type').order_by('mfi_type').\
+    def get(self):
+        category = User.objects.all().values('mfi_type').order_by('mfi_type'). \
             annotate(type=Count('mfi_type'))
         content = [category]
         return Response(content)
-    
+
     @method_decorator(cache_page(CACHE_TTL))
     def dispatch(self, *args, **kwargs):
         return super(UserTypeCountView, self).dispatch(*args, **kwargs)

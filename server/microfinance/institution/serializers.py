@@ -4,11 +4,11 @@ Handling Create | Read | Update | Delete of the API
 """
 
 from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-# from rest_framework.validators import UniqueValidator
 
-from institution.models import (User, UserFeedback, MfiReport, MfiAddress, MfiBoard,
-                                MfiStakeholder, MfiFeedback, AdminFeedback, IcomePrediction)
+from .models import (User, UserFeedback, MfiReport, MfiAddress, MfiBoard,
+                     MfiStakeholder, MfiFeedback, AdminFeedback, IncomePrediction)
 
 
 # Obtain Token Pair Serializer from Simple JWT API
@@ -21,11 +21,12 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['is_superuser'] = user.is_superuser
         return token
 
+
 # Address serializer for handling Create | Read| Update | Delete operations
 class MfiAddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = MfiAddress
-        fields = ['id', 'address_office', 'addres_phone_number',
+        fields = ['id', 'address_office', 'address_phone_number',
                   'address_website', 'address_pobox', 'address_district',
                   'address_region', 'date_joined', 'date_updated', ]
 
@@ -73,7 +74,7 @@ class AdminFeedbackSerializer(serializers.ModelSerializer):
 # Custom Mfi as user serializer handling Create operation
 class CustomUserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(min_length=6, write_only=True)
-    # email = serializers.EmailField(validators=[UniqueValidator(queryset=User.objects.all())])+
+    email = serializers.EmailField(validators=[UniqueValidator(queryset=User.objects.all())])
 
     class Meta:
         model = User
@@ -93,11 +94,10 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
 
 # Income prediction for the microfinance institutions
-class IcomePredictionSerializer(serializers.ModelSerializer):
-
+class IncomePredictionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = IcomePrediction
-        fields = ['input_age', 'input_fast', 'input_pp', 'input_r', 'input_f', 'input_hbA1c',
+        model = IncomePrediction
+        fields = ['report_assets', 'report_liability', 'report_revenue', 'report_income',
                   'error', 'message', 'prediction', 'confidence_score', 'created_date', ]
 
 
@@ -110,7 +110,7 @@ class UserDetailsSerializer(serializers.ModelSerializer):
     mfi_report = MfiReportSerializer(many=True, read_only=True)
     mfi_feedback = MfiFeedbackSerializer(many=True, read_only=True)
     admin_feedback = AdminFeedbackSerializer(many=True, read_only=True)
-    mfi_predicts = IcomePredictionSerializer(many=True, read_only=True)
+    mfi_predicts = IncomePredictionSerializer(many=True, read_only=True)
 
     class Meta:
         model = User

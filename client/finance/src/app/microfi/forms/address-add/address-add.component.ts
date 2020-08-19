@@ -61,7 +61,6 @@ export class AddressAddComponent implements OnInit {
       return;
     }
     if (this.addressForm.valid) {
-      console.log(this.addressForm.value);
       this.mfiService.registerMfiAddress(this.addressForm.value).subscribe(
         (resp) => {
           this.toastMessage.showSuccess(

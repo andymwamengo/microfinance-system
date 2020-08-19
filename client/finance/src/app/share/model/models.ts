@@ -71,6 +71,10 @@ export interface MfiReport {
     report_revenue: string;
     report_income: string;
     report_dividend: string;
+    error: string;
+    prediction: string;
+    confidence_score: string;
+    created_date: string;
 }
 
 // Admin feedback to Mfi
