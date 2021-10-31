@@ -92,7 +92,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'microfinance',
         'USER': 'mwamengo',
-        'PASSWORD': '44444444',
+        'PASSWORD': '2020',
         'HOST': '127.0.0.1',
         'PORT': '5432',
         'TEST': {

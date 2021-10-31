@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import {
   Microfi,
-  PredictReport,
   Board,
   Address,
   MfiReport,
@@ -28,7 +27,7 @@ export class ReportsComponent implements OnInit {
   addresses: Address[];
   reports: MfiReport[];
   stakeholders: Stakeholder[];
-  prediction: PredictReport[];
+  prediction: any[];
   errorMessage = '';
 
   // Loading data

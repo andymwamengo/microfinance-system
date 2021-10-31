@@ -5,7 +5,6 @@ import {
   Address,
   MfiReport,
   Stakeholder,
-  PredictReport,
 } from '../../../share/model/models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MicrofiService } from '../../../microfi/service/microfi.service';
@@ -25,7 +24,7 @@ export class MicrofiDetailsComponent implements OnInit {
   addresses: Address[];
   reports: MfiReport[];
   stakeholders: Stakeholder[];
-  prediction: PredictReport[];
+  prediction: any[];
   loading = false;
   total: number;
   errorMessage = '';

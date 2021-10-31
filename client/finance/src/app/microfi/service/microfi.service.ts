@@ -16,7 +16,7 @@ import {
   Board,
   MfiReport,
 } from 'src/app/share/model/models';
-import { Microfi, License, PredictReport } from '../../share/model/models';
+import { Microfi, License } from '../../share/model/models';
 
 @Injectable({
   providedIn: 'root',
